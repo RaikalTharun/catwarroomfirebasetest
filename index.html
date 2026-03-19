@@ -4269,13 +4269,13 @@ function renderResults(saved){
   let html = `
   <div class="res-hero">
     <div style="font-family:var(--fd);font-size:14px;font-weight:700;opacity:.7;letter-spacing:.5px;text-transform:uppercase;margin-bottom:8px">Mock Test 1 — Final Score</div>
-    <div class="res-score">${saved.total}</div>
-    <div class="res-total">out of 204</div>
+<div class="res-score">${saved.total === 0 ? '<span style="-webkit-text-fill-color:#c4b5fd;font-size:64px">0</span>' : saved.total}</div>
+<div class="res-total">out of ${saved.sectionalSection ? (saved.sectionalSection==='VARC'?72:66) : 204}</div>
     <div class="res-pct">~${saved.percentile}%ile · ${TODAY}</div>
   </div>
 
   <div class="res-grid">
-    ${allSecs.map(s=>`<div class="res-sec-card">
+ ${allSecs.filter(s=>!saved.sectionalSection || s.name===saved.sectionalSection).map(s=>`<div class="res-sec-card">
       <div class="rsc-name">${s.name}</div>
       <div class="rsc-score" style="color:${s.c}">${s.score}<span style="font-size:14px;opacity:.4">/${s.max}</span></div>
       <div class="rsc-detail"><span style="color:#07825e;font-weight:700"><svg viewBox="0 0 24 24" fill="none" stroke="#07825e" stroke-width="2.5" style="width:13px;height:13px;vertical-align:-2px;margin-right:2px"><polyline points="20 6 9 17 4 12"/></svg>${s.detail.correct}</span> correct &nbsp;·&nbsp; <span style="color:#f03d3d;font-weight:700"><svg viewBox="0 0 24 24" fill="none" stroke="#f03d3d" stroke-width="2.5" style="width:13px;height:13px;vertical-align:-2px;margin-right:2px"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>${s.detail.wrong}</span> wrong &nbsp;·&nbsp; <span style="color:var(--muted);font-weight:600">${s.detail.unattempted} skipped</span></div>
