@@ -3673,7 +3673,7 @@ let currentSection = 'VARC';
 
 /* ══════════════════ HELPERS ══════════════════ */
 function daysLeft(){ return Math.max(0,Math.ceil((new Date('2026-11-29')-new Date())/86400000)) }
-function isUnlocked(release){ return true }
+function isUnlocked(release){ return TODAY >= release }
 // toast handled by main tracker
 function saveResults(){
   localStorage.setItem('cat26_test_results',JSON.stringify(results));
@@ -3715,7 +3715,9 @@ function renderMockGrid(){
         <span><svg style="width:12px;height:12px;vertical-align:-2px;margin-right:3px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="2" width="6" height="4" rx="1"/><path d="M9 2H7a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2h-2"/></svg>66 Questions</span>
         <span>⏱ 120 min</span>
       </div>
-
+      <div class="mc-meta" style="margin-top:-6px">
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:12px;height:12px;vertical-align:-2px;margin-right:3px"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>${unlocked?'Released':'Releases'}: ${m.release}</span>
+      </div>
       ${score?`<div class="mc-score has-score">Last score: <strong>${score.total}/204</strong> · ${score.percentile}%ile · VARC:${score.varc} DILR:${score.dilr} QA:${score.qa}</div>`:''}
       ${score
         ? `<div style="display:flex;gap:8px">
